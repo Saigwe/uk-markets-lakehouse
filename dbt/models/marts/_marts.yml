@@ -1,0 +1,12 @@
+version: 2
+models:
+  - name: fct_observation_latest
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [series_id, obs_date]
+  - name: rpt_revisions
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [series_id, obs_date]

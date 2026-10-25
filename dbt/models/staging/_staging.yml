@@ -1,0 +1,24 @@
+version: 2
+models:
+- name: stg_bronze__series
+  columns:
+  - name: series_id
+    data_tests:
+    - unique
+    - not_null
+- name: stg_bronze__observations
+  data_tests:
+  - unique_combination:
+      arguments:
+        columns:
+        - series_id
+        - obs_date
+        - vintage_ts
+  columns:
+  - name: series_id
+    data_tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('stg_bronze__series')
+          field: series_id

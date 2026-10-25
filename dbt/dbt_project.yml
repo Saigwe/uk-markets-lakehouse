@@ -1,0 +1,22 @@
+name: uk_markets_lakehouse
+version: 0.1.0
+config-version: 2
+profile: uk_markets_lakehouse
+model-paths:
+- models
+macro-paths:
+- macros
+test-paths:
+- tests
+target-path: target
+clean-targets:
+- target
+- dbt_packages
+models:
+  uk_markets_lakehouse:
+    staging:
+      +schema: silver
+      +materialized: view
+    marts:
+      +schema: gold
+      +materialized: table
