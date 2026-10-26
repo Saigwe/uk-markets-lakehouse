@@ -120,7 +120,7 @@ make canary         # the latest live release into a throwaway lakehouse
 - [x] Revision analysis: how far first estimates move, by horizon, on growth rates
 - [ ] Retail sales and labour-market datasets; World Bank series for international comparison
 - [ ] Athena views over `main` and a small dashboard
-- [ ] 3-minute Loom walkthrough
+- [ ] 3-minute Loom walkthrough ([script ready](docs/walkthrough.md))
 
 ## Interview topics this project prepares
 - Open table formats: snapshots, branches and tags, schema evolution, time travel
