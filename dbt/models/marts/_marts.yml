@@ -1,12 +1,49 @@
 version: 2
+
 models:
   - name: fct_observation_latest
     data_tests:
       - unique_combination:
           arguments:
-            columns: [series_id, obs_date]
-  - name: rpt_revisions
+            columns: [dataset_id, series_code, period]
+  - name: rpt_headline_revisions
     data_tests:
       - unique_combination:
           arguments:
-            columns: [series_id, obs_date]
+            columns: [dataset_id, period]
+    columns:
+      - name: first_growth_pct
+        data_tests: [not_null]
+  - name: rpt_revision_by_horizon
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [dataset_id, horizon]
+  - name: rpt_macro_monthly
+    columns:
+      - name: month
+        data_tests: [unique, not_null]
+  - name: rpt_lake_snapshots
+    columns:
+      - name: snapshot_id
+        data_tests: [unique, not_null]
+
+unit_tests:
+  - name: rebasing_the_index_is_not_a_revision
+    description: Two vintages with different index levels but the same growth must show zero revision.
+    model: int_growth_by_vintage
+    given:
+      - input: ref('stg_lake__observations')
+        rows:
+          - {dataset_id: g, series_code: A--T, period: 2024-01-01, vintage: 1, value: 100.0, frequency: monthly}
+          - {dataset_id: g, series_code: A--T, period: 2024-02-01, vintage: 1, value: 101.0, frequency: monthly}
+          - {dataset_id: g, series_code: A--T, period: 2024-01-01, vintage: 2, value: 50.0, frequency: monthly}
+          - {dataset_id: g, series_code: A--T, period: 2024-02-01, vintage: 2, value: 50.5, frequency: monthly}
+          - {dataset_id: g, series_code: A--T, period: 2024-04-01, vintage: 2, value: 51.0, frequency: monthly}
+    expect:
+      rows:
+        - {period: 2024-01-01, vintage: 1, growth_mom_pct: null}
+        - {period: 2024-02-01, vintage: 1, growth_mom_pct: 1.0}
+        - {period: 2024-01-01, vintage: 2, growth_mom_pct: null}
+        - {period: 2024-02-01, vintage: 2, growth_mom_pct: 1.0}
+        - {period: 2024-04-01, vintage: 2, growth_mom_pct: null}

@@ -1,6 +1,7 @@
-dbt-core>=1.10,<1.12
-dbt-duckdb>=1.9,<2.0
-duckdb>=1.1,<2.0
+dbt-core>=1.11,<1.12
+dbt-duckdb>=1.11,<1.12
+duckdb>=1.5,<2.0
+pyiceberg[sql-sqlite,pyarrow]==0.12.0
 pandas>=2.2
 numpy>=1.26
-pyyaml>=6.0
+pytest>=8

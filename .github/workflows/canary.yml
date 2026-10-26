@@ -1,0 +1,20 @@
+name: canary
+
+# Weekly live pull of the latest ONS GDP release and today's Bank of England rates into a throwaway lakehouse,
+# through the same write-audit-publish audits. Fails when an upstream API or file format changes.
+on:
+  schedule:
+    - cron: "45 7 * * 1"   # Mondays 07:45 UTC
+  workflow_dispatch:
+
+jobs:
+  live-pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: make canary

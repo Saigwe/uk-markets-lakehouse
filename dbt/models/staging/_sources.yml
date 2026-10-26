@@ -1,7 +1,9 @@
 version: 2
 sources:
 - name: bronze
-  description: Raw tables, loaded by the fixture generator (CI) or the real-data loaders.
+  description: The published (main-branch) state of the Iceberg table macro.observations, exported by ingestion/pull.py export.
   tables:
-  - name: series
   - name: observations
+    description: Every published vintage of every series, long format.
+  - name: lake_snapshots
+    description: The Iceberg snapshot log, with the tag of each published vintage.

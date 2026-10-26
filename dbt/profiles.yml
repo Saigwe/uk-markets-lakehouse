@@ -4,5 +4,5 @@ uk_markets_lakehouse:
   outputs:
     duckdb:
       type: duckdb
-      path: "{{ env_var('DUCKDB_PATH', '../warehouse/uk_markets_lakehouse.duckdb') }}"
+      path: "{{ env_var('DUCKDB_PATH', '../warehouse/lake.duckdb') }}"
       threads: 4

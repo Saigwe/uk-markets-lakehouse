@@ -12,11 +12,19 @@ target-path: target
 clean-targets:
 - target
 - dbt_packages
+vars:
+  # The headline series of each dataset: total GDP (A--T) and all-items CPIH (CP00).
+  gdp_headline: "A--T"
+  cpih_headline: "CP00"
+
 models:
   uk_markets_lakehouse:
     staging:
       +schema: silver
       +materialized: view
+    intermediate:
+      +schema: silver
+      +materialized: table
     marts:
       +schema: gold
       +materialized: table
