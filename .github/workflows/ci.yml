@@ -17,6 +17,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Fixture pipeline (offline pull -> Iceberg write-audit-publish -> export -> dbt build -> lakehouse tests)
         run: make fixture-all
+      - name: README charts render from the results
+        run: python charts/make_charts.py --db warehouse/fixture.duckdb --out "$RUNNER_TEMP/charts"
 
   terraform:
     runs-on: ubuntu-latest

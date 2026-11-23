@@ -5,3 +5,4 @@ pyiceberg[sql-sqlite,pyarrow]==0.12.0
 pandas>=2.2
 numpy>=1.26
 pytest>=8
+matplotlib>=3.8

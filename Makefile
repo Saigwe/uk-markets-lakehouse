@@ -7,7 +7,7 @@ TODAY ?= $(shell $(PY) -c "import datetime; print(datetime.date.today())")
 DBT_BIN ?= dbt
 PULL = $(PY) ingestion/pull.py --raw $(RAW) --warehouse $(WAREHOUSE) --db $(DB) $(OFFLINE)
 
-.PHONY: all pull export dbt test fixture-all canary clean
+.PHONY: all pull export dbt test fixture-all canary clean charts
 
 all: pull export dbt test   ## live ONS + BoE pulls (cached), write-audit-publish, dbt, tests
 
@@ -37,3 +37,6 @@ canary:   ## the latest live release only, into a throwaway lakehouse: catches u
 
 clean:
 	rm -rf warehouse dbt/target dbt/logs data/fixture data/canary
+
+charts:                                            ## README charts -> docs/charts
+	$(PY) charts/make_charts.py

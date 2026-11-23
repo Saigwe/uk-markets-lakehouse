@@ -21,6 +21,13 @@ Project 16 of my portfolio plan. At a Big Four firm I delivered BI for a state g
 | **Why it matters** | Analysts can ask "what did we know on 15 May?" (time travel by tag), and a broken upstream file can't reach a board pack (write-audit-publish). |
 | **Proof** | [Numbers](#numbers) from a live pull on 26 October 2026; CI replays the same pipeline offline on every push. |
 
+## Charts
+Rendered from this repo's own results by `charts/make_charts.py` (`make charts`); CI re-renders them on every push.
+
+![UK monthly GDP growth as first published vs the latest vintage](docs/charts/gdp_revisions.png)
+
+![CPIH inflation, Bank Rate and 10-year gilt yield by month since 2015](docs/charts/macro_monthly.png)
+
 ## Architecture
 ```mermaid
 flowchart LR
